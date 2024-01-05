@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+{% block body_block %}
+{% if user.is_authenticated %}
+<form method="post" class='post-form'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Post">
+</form>
+<script>var editor = new MediumEditor('.editable');</script>
+{% else %}
+<a class='btn btn-primary' href={% url "blog:login" %}>Login</a>
+{% endif %} 
+{% endblock %}

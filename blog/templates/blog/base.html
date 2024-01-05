@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Base</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel='stylesheet', href={% static 'css/blog.css' %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Russo+One&display=swap" rel="stylesheet">
+  </head>
+  <body class="loader">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href={% url "blog:index"%}>Home</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"><a class="nav-link" href={% url "blog:post_list" %}>My Blog<span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href={% url "admin:index" %}>Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href={% url "blog:about" %}>About</a></li>
+                <li class="nav-item"><a class="nav-link" href='https://www.github.com'>Github</a></li>
+                <li class="nav-item"><a class="nav-link" href='https://www.linkedin.com'>LinkedIn</a></li>
+                {% if user.is_authenticated %}
+                <li><a class="nav-link"href={% url "blog:post_new"%}>New Post</a></li>
+                <li class="nav-item">
+                    <a class="nav-link"href={% url "blog:post_draft_list"%}>Post drafts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={% url "blog:logout"%}>Logout</a>
+                </li>
+                <li class="nav-link">Welcome: {{user.username}}</li>
+                {% else %}
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href={% url "blog:login" %}>Login</a>
+                </li>
+                {% endif %}
+                <!-- Add more menu items as needed -->
+            </ul>
+        </div>
+    </nav>
+    <div class="content container">
+        
+    </div>
+    {% block body_block %}
+    <h1>I belong to the base.html </h1>
+    {% endblock %}
+</body>
+</html>

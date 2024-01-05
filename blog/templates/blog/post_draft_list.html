@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="centerstage">
+            {% if user.is_authenticated %}
+            {% for draft in draft_list %}
+            <div class="loader">
+                <h1 class="draft-title"><a href={% url "blog:post_detail" pk=draft.pk%}>{{ draft.title }}</a></h1>
+                <p class="post-meta">Created by {{ draft.author }} on {{ draft.create_date|date:'D M Y' }}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
